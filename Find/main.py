@@ -47,7 +47,7 @@ def main(video, img):
         print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    video = "files\output.avi"
-    img = "files\ezhov.png"
+    video = "output.avi"
+    img = "ezhov.png"
 
     main(video, img)
