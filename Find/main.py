@@ -12,10 +12,10 @@ def read_video(video):
         raise FileNotFoundError(f"Error: Unable to open the video at {video}")
     return capture
 
-def is_similar_template(gray_frame, template, treshold_value):
+def is_similar_template(gray_frame, template, threshold_value):
     result = cv2.matchTemplate(gray_frame, template, cv2.TM_CCOEFF_NORMED)
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    return max_val >= treshold_value
+    return max_val >= threshold_value
 
 def main(video, img):
     try:
@@ -24,7 +24,7 @@ def main(video, img):
         capture = read_video(video)
 
         image_count = 0
-        treshold_value = 0.9
+        threshold_value = 0.9
 
         while True:
             ret, frame = capture.read()
@@ -32,7 +32,7 @@ def main(video, img):
                 break
 
             gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            if is_similar_template(gray_frame, template, treshold_value):
+            if is_similar_template(gray_frame, template, threshold_value):
                 image_count += 1
                 if image_count % 10 == 0:
                     print(f"Found {image_count} images so far.")
